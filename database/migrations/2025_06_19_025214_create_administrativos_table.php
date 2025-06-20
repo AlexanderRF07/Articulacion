@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('idadministradores')->primary();
             $table->string('nombres', 45)->nullable();
             $table->string('apellidos', 45)->nullable();
-            $table->integer('user_iduser')->index('fk_administrativos_user1_idx');
+            $table->integer('roluser_iduser')->index('fk_administrativos_user1_idx');
         });
     }
 
