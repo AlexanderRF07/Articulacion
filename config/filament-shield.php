@@ -20,9 +20,7 @@ return [
 
     'tenant_model' => null,
 
-    'auth_provider_model' => [
-        'fqcn' => 'App\\Models\\User',
-    ],
+    
 
     'super_admin' => [
         'enabled' => true,
