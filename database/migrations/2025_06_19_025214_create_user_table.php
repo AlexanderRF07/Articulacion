@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('roluser', function (Blueprint $table) {
             $table->integer('iduser')->primary();
             $table->string('tipoRol', 45)->nullable();
         });
