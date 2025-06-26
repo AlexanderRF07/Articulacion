@@ -66,10 +66,7 @@ return [
     ],
 
     'exclude' => [
-        'resources' => [
-    'PermissionResource',
-    'RoleResource',
-],
+        'resources' => [],
         'enabled' => true,
 
         'pages' => [
@@ -77,19 +74,19 @@ return [
         ],
 
         'widgets' => [
-            'AccountWidget', 'FilamentInfoWidget',
+            'AccountWidget',
+            'FilamentInfoWidget',
         ],
 
-            
-    ],
 
+    ],
     'discovery' => [
         'discover_all_resources' => true,
         'discover_all_widgets' => true,
         'discover_all_pages' => true,
-    ],    'register_role_policy' => [
+    ],
+    'register_role_policy' => [
         'enabled' => true,
     ],
 
 ];
-                                      
