@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aprendices', function (Blueprint $table) {
-            $table->integer('idaprendices')->primary();
-            $table->string('nombre', 45)->nullable();
-            $table->string('apellidos', 45)->nullable();
-            $table->string('idusuario', 45)->nullable();
-            $table->integer('roluser_iduser')->index('fk_aprendices_user1_idx');
-        });
+       Schema::create('aprendices', function (Blueprint $table) {
+    $table->id('idaprendices');
+    $table->string('nombre', 45);
+    $table->string('apellidos', 45);
+    $table->timestamps();
+});
+        
     }
 
     /**

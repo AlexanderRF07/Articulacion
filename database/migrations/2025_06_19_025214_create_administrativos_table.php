@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('administrativos', function (Blueprint $table) {
-            $table->integer('idadministradores')->primary();
+            $table->id('idadministrativos');
             $table->string('nombres', 45)->nullable();
             $table->string('apellidos', 45)->nullable();
-            $table->integer('roluser_iduser')->index('fk_administrativos_user1_idx');
+          
         });
     }
 

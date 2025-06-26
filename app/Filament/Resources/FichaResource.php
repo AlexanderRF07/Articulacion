@@ -23,7 +23,27 @@ class FichaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('codigo')
+                    ->required()
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('fecha_inicio')
+                    ->required()
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('cupos')
+                    ->required()
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('anios_escolares_idanios_escolares')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('colegios_idcolegios')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('programas_idprogramas')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('instructores_idinstructores')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,13 +51,37 @@ class FichaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('codigo')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('fecha_inicio')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('cupos')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('anios_escolares_idanios_escolares')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('colegios_idcolegios')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('programas_idprogramas')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('instructores_idinstructores')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -59,8 +103,11 @@ class FichaResource extends Resource
         return [
             'index' => Pages\ListFichas::route('/'),
             'create' => Pages\CreateFicha::route('/create'),
-            'view' => Pages\ViewFicha::route('/{record}'),
             'edit' => Pages\EditFicha::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

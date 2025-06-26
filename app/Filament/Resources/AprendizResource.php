@@ -24,14 +24,11 @@ class AprendizResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nombre')
+                    ->required()
                     ->maxLength(45),
                 Forms\Components\TextInput::make('apellidos')
-                    ->maxLength(45),
-                Forms\Components\TextInput::make('idusuario')
-                    ->maxLength(45),
-                Forms\Components\TextInput::make('user_iduser')
                     ->required()
-                    ->numeric(),
+                    ->maxLength(45),
             ]);
     }
 
@@ -39,24 +36,23 @@ class AprendizResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('idaprendices')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('apellidos')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('idusuario')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('user_iduser')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -78,8 +74,12 @@ class AprendizResource extends Resource
         return [
             'index' => Pages\ListAprendizs::route('/'),
             'create' => Pages\CreateAprendiz::route('/create'),
-            'view' => Pages\ViewAprendiz::route('/{record}'),
             'edit' => Pages\EditAprendiz::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
+
 }

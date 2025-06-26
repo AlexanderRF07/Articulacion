@@ -23,7 +23,26 @@ class DocumentoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('Documento')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('compromisoDeAprendiz')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('tratamientoDeMenores')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('certificadoEPS')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('registroCivil')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('url')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('estado')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('tiposdocumentos_idtiposdocumentos')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('matriculas_fichas_idmatriculas_fichas')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,13 +50,39 @@ class DocumentoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('Documento')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('compromisoDeAprendiz')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tratamientoDeMenores')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('certificadoEPS')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('registroCivil')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('url')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('estado')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tiposdocumentos_idtiposdocumentos')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('matriculas_fichas_idmatriculas_fichas')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -59,8 +104,11 @@ class DocumentoResource extends Resource
         return [
             'index' => Pages\ListDocumentos::route('/'),
             'create' => Pages\CreateDocumento::route('/create'),
-            'view' => Pages\ViewDocumento::route('/{record}'),
             'edit' => Pages\EditDocumento::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

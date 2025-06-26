@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TipoDocumentoResource\Pages;
-use App\Filament\Resources\TipoDocumentoResource\RelationManagers;
-use App\Models\TipoDocumento;
+use App\Filament\Resources\TiposDocumentoResource\Pages;
+use App\Filament\Resources\TiposDocumentoResource\RelationManagers;
+use App\Models\TiposDocumento;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TipoDocumentoResource extends Resource
+class TiposDocumentoResource extends Resource
 {
-    protected static ?string $model = TipoDocumento::class;
+    protected static ?string $model = TiposDocumento::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,7 +23,9 @@ class TipoDocumentoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('tiposdocumentos')
+                    ->required()
+                    ->maxLength(45),
             ]);
     }
 
@@ -31,13 +33,21 @@ class TipoDocumentoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('tiposdocumentos')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -57,10 +67,9 @@ class TipoDocumentoResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTipoDocumentos::route('/'),
-            'create' => Pages\CreateTipoDocumento::route('/create'),
-            'view' => Pages\ViewTipoDocumento::route('/{record}'),
-            'edit' => Pages\EditTipoDocumento::route('/{record}/edit'),
+            'index' => Pages\ListTiposDocumentos::route('/'),
+            'create' => Pages\CreateTiposDocumento::route('/create'),
+            'edit' => Pages\EditTiposDocumento::route('/{record}/edit'),
         ];
     }
 }

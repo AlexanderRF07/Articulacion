@@ -23,7 +23,9 @@ class ProgramaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('programa')
+                    ->required()
+                    ->maxLength(45),
             ]);
     }
 
@@ -31,13 +33,21 @@ class ProgramaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('programa')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -59,8 +69,11 @@ class ProgramaResource extends Resource
         return [
             'index' => Pages\ListProgramas::route('/'),
             'create' => Pages\CreatePrograma::route('/create'),
-            'view' => Pages\ViewPrograma::route('/{record}'),
             'edit' => Pages\EditPrograma::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

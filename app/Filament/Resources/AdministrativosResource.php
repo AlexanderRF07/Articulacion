@@ -27,9 +27,6 @@ class AdministrativosResource extends Resource
                     ->maxLength(45),
                 Forms\Components\TextInput::make('apellidos')
                     ->maxLength(45),
-                Forms\Components\TextInput::make('user_iduser')
-                    ->required()
-                    ->numeric(),
             ]);
     }
 
@@ -37,22 +34,18 @@ class AdministrativosResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('idadministradores')
+                Tables\Columns\TextColumn::make('idadministrativos')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nombres')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('apellidos')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_iduser')
-                    ->numeric()
-                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -74,8 +67,12 @@ class AdministrativosResource extends Resource
         return [
             'index' => Pages\ListAdministrativos::route('/'),
             'create' => Pages\CreateAdministrativos::route('/create'),
-            'view' => Pages\ViewAdministrativos::route('/{record}'),
             'edit' => Pages\EditAdministrativos::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
 }
+}
+    

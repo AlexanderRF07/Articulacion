@@ -24,10 +24,13 @@ class ColegioResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nombre')
+                    ->required()
                     ->maxLength(45),
                 Forms\Components\TextInput::make('departamento')
+                    ->required()
                     ->maxLength(45),
                 Forms\Components\TextInput::make('ciudad')
+                    ->required()
                     ->maxLength(45),
             ]);
     }
@@ -36,21 +39,25 @@ class ColegioResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('idcolegios')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('departamento')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ciudad')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -72,8 +79,11 @@ class ColegioResource extends Resource
         return [
             'index' => Pages\ListColegios::route('/'),
             'create' => Pages\CreateColegio::route('/create'),
-            'view' => Pages\ViewColegio::route('/{record}'),
             'edit' => Pages\EditColegio::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colegios', function (Blueprint $table) {
-            $table->integer('idcolegios')->primary();
-            $table->string('nombre', 45)->nullable();
-            $table->string('departamento', 45)->nullable();
-            $table->string('ciudad', 45)->nullable();
-        });
+      Schema::create('colegios', function (Blueprint $table) {
+    $table->id('idcolegios');
+    $table->string('nombre', 45);
+    $table->string('departamento', 45);
+    $table->string('ciudad', 45);
+    $table->timestamps();
+});
     }
 
     /**

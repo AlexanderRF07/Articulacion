@@ -23,7 +23,7 @@ class AniosEscolaresResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('anios escolares'),
+                Forms\Components\TextInput::make('anios_escolares'),
             ]);
     }
 
@@ -31,9 +31,8 @@ class AniosEscolaresResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('anios escolares')
-                    ->date()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('anios_escolares')
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -65,4 +64,8 @@ class AniosEscolaresResource extends Resource
             'edit' => Pages\EditAniosEscolares::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

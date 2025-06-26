@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use     \BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Pages\Page;
+
 {
     
 }
@@ -54,4 +56,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function canAccessPanel(Page $panel): bool
+    {
+        
+
+    return true;
+}
+
 }

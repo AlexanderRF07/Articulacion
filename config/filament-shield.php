@@ -1,10 +1,6 @@
 <?php
 
 return [
-    
-     'auth_provider_model' => [
-        'fqcn' => 'App\\Models\\User',
-    ],
     'shield_resource' => [
         'should_register_navigation' => true,
         'slug' => 'shield/roles',
@@ -20,12 +16,14 @@ return [
 
     'tenant_model' => null,
 
-    
+    'auth_provider_model' => [
+        'fqcn' => 'App\\Models\\User',
+    ],
 
     'super_admin' => [
         'enabled' => true,
         'name' => 'super_admin',
-        'define_via_gate' => false,
+        'define_via_gate' => true,
         'intercept_gate' => 'before', // after
     ],
 
@@ -68,6 +66,10 @@ return [
     ],
 
     'exclude' => [
+        'resources' => [
+    'PermissionResource',
+    'RoleResource',
+],
         'enabled' => true,
 
         'pages' => [
@@ -78,18 +80,16 @@ return [
             'AccountWidget', 'FilamentInfoWidget',
         ],
 
-        'resources' => [],
+            
     ],
 
     'discovery' => [
-        'discover_all_resources' => false,
-        'discover_all_widgets' => false,
-        'discover_all_pages' => false,
-    ],
-    
-
-    'register_role_policy' => [
+        'discover_all_resources' => true,
+        'discover_all_widgets' => true,
+        'discover_all_pages' => true,
+    ],    'register_role_policy' => [
         'enabled' => true,
     ],
 
 ];
+                                      

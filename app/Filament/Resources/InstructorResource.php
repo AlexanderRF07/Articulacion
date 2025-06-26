@@ -23,7 +23,12 @@ class InstructorResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nombre')
+                    ->required()
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('apellidos')
+                    ->required()
+                    ->maxLength(45),
             ]);
     }
 
@@ -31,13 +36,23 @@ class InstructorResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nombre')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('apellidos')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -59,8 +74,11 @@ class InstructorResource extends Resource
         return [
             'index' => Pages\ListInstructors::route('/'),
             'create' => Pages\CreateInstructor::route('/create'),
-            'view' => Pages\ViewInstructor::route('/{record}'),
             'edit' => Pages\EditInstructor::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }

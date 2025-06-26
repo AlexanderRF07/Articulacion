@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instructores', function (Blueprint $table) {
-            $table->integer('idinstructores')->primary();
-            $table->string('nombre', 45)->nullable();
-            $table->string('apellidos', 45)->nullable();
-            $table->integer('roluser_iduser')->index('fk_instructores_user1_idx');
-        });
+      Schema::create('instructores', function (Blueprint $table) {
+    $table->id('idinstructores');
+    $table->string('nombre', 45);
+    $table->string('apellidos', 45);
+    $table->timestamps();
+});
     }
 
     /**

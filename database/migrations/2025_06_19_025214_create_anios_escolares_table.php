@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anios escolares', function (Blueprint $table) {
-            $table->integer('idanios escolares', true);
-            $table->string('anios escolares', 45)->nullable();
-        });
+        Schema::create('anios_escolares', function (Blueprint $table) {
+    $table->id('idanios_escolares');
+    $table->string('anios_escolares', 45);
+    $table->timestamps();
+});
     }
 
     /**

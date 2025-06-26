@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tiposdocumentos', function (Blueprint $table) {
-            $table->integer('idtiposdocumentos')->primary();
-            $table->string('tiposdocumentos', 45)->nullable();
-        });
+  Schema::create('tiposdocumentos', function (Blueprint $table) {
+    $table->id('idtiposdocumentos');
+    $table->string('tiposdocumentos', 45);
+    $table->timestamps();
+});
+
     }
 
     /**

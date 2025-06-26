@@ -23,7 +23,12 @@ class MatriculaFichaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('fichas_idfichas')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('aprendices_idaprendices')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,13 +36,25 @@ class MatriculaFichaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('fichas_idfichas')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('aprendices_idaprendices')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -59,8 +76,11 @@ class MatriculaFichaResource extends Resource
         return [
             'index' => Pages\ListMatriculaFichas::route('/'),
             'create' => Pages\CreateMatriculaFicha::route('/create'),
-            'view' => Pages\ViewMatriculaFicha::route('/{record}'),
             'edit' => Pages\EditMatriculaFicha::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+{
+    return true;
+}
 }
